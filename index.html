@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="theme-color" content="#0a1628"/>
+<title>Contemporaneo Gastronomia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--nv:#0a1628;--nv2:#0d1e35;--nv3:#152640;--nv4:#1e3254;--gd:#c9a84c;--gd2:#e8c96a;--wh:#f5f0e8;--wh2:#d4cfc4}
+body{background:var(--nv);color:var(--wh);font-family:"DM Sans",sans-serif;max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:84px}
+input,select,button,textarea{font-family:"DM Sans",sans-serif}
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+::-webkit-scrollbar{width:0}
+#hdr{background:var(--nv2);border-bottom:1px solid rgba(201,168,76,0.2);padding:14px 18px;position:sticky;top:0;z-index:100}
+#hdr-top{display:flex;justify-content:space-between;align-items:center}
+#logo{font-family:"Playfair Display",serif;font-size:18px;font-weight:700;color:var(--gd);letter-spacing:0.5px}
+#sub{font-size:9px;color:var(--wh2);letter-spacing:3px;text-transform:uppercase;margin-top:1px}
+#hdr-date{font-size:11px;color:var(--wh2)}
+#mnav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:10px}
+#mnav button{background:none;border:none;color:var(--gd);font-size:16px;cursor:pointer;padding:2px 10px}
+#mlbl{font-size:13px;font-weight:500;color:var(--wh);text-transform:capitalize;min-width:160px;text-align:center}
+#content{padding:18px 14px}
+#nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--nv2);border-top:1px solid rgba(201,168,76,0.15);display:flex;padding:8px 2px 14px;z-index:100}
+#nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:5px 2px;color:#4a6080;font-size:8px;font-weight:500;text-transform:uppercase;letter-spacing:0.3px}
+#nav button.active{color:var(--gd)}
+.card{background:var(--nv2);border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:16px;margin-bottom:12px}
+.csm{background:var(--nv2);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:14px}
+.cgold{background:linear-gradient(135deg,#1a2e4a,#0f1e35);border:1px solid rgba(201,168,76,0.4);border-radius:14px;padding:18px;margin-bottom:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:11px;color:var(--wh2);margin-bottom:5px;letter-spacing:0.5px;text-transform:uppercase}
+.fld input,.fld select,.fld textarea{width:100%;background:var(--nv3);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:10px 12px;color:var(--wh);font-size:14px;outline:none;-webkit-appearance:none;resize:none;font-family:"DM Sans",sans-serif}
+.fld input::placeholder,.fld textarea::placeholder{color:#3a5070}
+.fld textarea{height:80px}
+.btn{border:none;border-radius:9px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btng{background:linear-gradient(135deg,var(--gd),var(--gd2));color:var(--nv)}
+.btno{background:transparent;color:var(--gd);border:1px solid rgba(201,168,76,0.4)}
+.btnd{background:#3a1010;color:#f87171;border:1px solid #8b2020}
+.btnf{width:100%;justify-content:center}
+#mod-ov{display:none;position:fixed;inset:0;background:rgba(5,10,20,0.85);z-index:200;align-items:center;justify-content:center;padding:16px}
+#mod-ov.open{display:flex}
+.mbox{background:var(--nv2);border:1px solid rgba(201,168,76,0.25);border-radius:18px;width:100%;max-width:440px;max-height:92vh;overflow-y:auto}
+.mhd{display:flex;justify-content:space-between;align-items:center;padding:20px 22px 16px;border-bottom:1px solid rgba(201,168,76,0.15)}
+.mhd span{font-family:"Playfair Display",serif;font-size:16px;color:var(--gd)}
+.mhd button{background:none;border:none;color:#4a6080;cursor:pointer;font-size:22px}
+.mbd{padding:22px}
+.pb{background:var(--nv3);border-radius:6px;height:5px;margin:8px 0}
+.pf{height:5px;border-radius:6px;transition:width 0.6s}
+.rbw{display:flex;justify-content:space-between;align-items:center}
+.stl{font-family:"Playfair Display",serif;font-size:14px;color:var(--gd);margin-bottom:10px;font-weight:600}
+.emp{color:#3a5070;text-align:center;padding:24px;font-size:13px;font-style:italic}
+.ab{border-radius:12px;padding:14px;margin-bottom:12px}
+.aw{background:#1f1800;border:1px solid rgba(201,168,76,0.3)}
+.aok{background:#0d1f12;border:1px solid rgba(42,122,75,0.3)}
+.ae{background:#1f0d0d;border:1px solid rgba(139,32,32,0.4)}
+.txr{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--nv2);border:1px solid rgba(201,168,76,0.1);border-radius:12px;margin-bottom:8px}
+.txd{font-weight:500;font-size:13px;color:var(--wh)}
+.txm{font-size:11px;color:#4a6080;margin-top:2px}
+.ib{background:none;border:none;color:#3a5070;cursor:pointer;padding:4px;font-size:15px}
+.tag{display:inline-flex;align-items:center;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.ti{background:#0d2a1a;color:#4ade80;border:1px solid #1a4a2e}
+.to{background:#2a0d0d;color:#f87171;border:1px solid #4a1a1a}
+.drop{border:2px dashed rgba(201,168,76,0.25);border-radius:12px;padding:22px;text-align:center;cursor:pointer;margin-bottom:14px;background:var(--nv3)}
+.drop.hf{border-color:rgba(74,222,128,0.5)}
+.drop.an{border-color:var(--gd)}
+.cgrd{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:10px}
+.cdn{text-align:center;font-size:9px;color:#4a6080;padding:4px 0;letter-spacing:0.5px;text-transform:uppercase}
+.cd{text-align:center;padding:6px 2px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--wh2);min-height:28px;display:flex;align-items:center;justify-content:center;position:relative}
+.cd.tdy{background:var(--nv4);color:var(--gd);font-weight:700}
+.cd.hev::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--gd);position:absolute;bottom:2px;left:50%;transform:translateX(-50%)}
+.cd.om{color:#2a3a4a}
+.evc{background:var(--nv3);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:14px;margin-bottom:10px}
+.edb{background:var(--gd);color:var(--nv);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700}
+.ni{background:var(--nv3);border:1px solid rgba(201,168,76,0.1);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.chkl{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--wh2)}
+.chkl input{width:16px;height:16px;cursor:pointer;accent-color:var(--gd)}
+</style>
+</head>
+<body>
+<div id="hdr">
+  <div id="hdr-top">
+    <div><div id="logo">Contemporaneo</div><div id="sub">Gastronomia &middot; Gestao</div></div>
+    <div id="hdr-date"></div>
+  </div>
+  <div id="mnav" style="display:none">
+    <button onclick="chM(-1)">&#9664;</button>
+    <span id="mlbl"></span>
+    <button onclick="chM(1)">&#9654;</button>
+  </div>
+</div>
+<div id="content"></div>
+<div id="nav">
+  <button onclick="goTab('home')" id="nt-home" class="active">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3l9 9M5 10v10h5v-6h4v6h5V10"/></svg>Home
+  </button>
+  <button onclick="goTab('fin')" id="nt-fin">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-2 4 2 4-2 4 2V4a2 2 0 0 0-2-2z"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Financas
+  </button>
+  <button onclick="goTab('metas')" id="nt-metas">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Metas
+  </button>
+  <button onclick="goTab('eventos')" id="nt-eventos">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Eventos
+  </button>
+  <button onclick="goTab('notas')" id="nt-notas">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Notas
+  </button>
+</div>
+<div id="mod-ov" onclick="if(event.target===this)cMod()">
+  <div class="mbox">
+    <div class="mhd"><span id="mod-t"></span><button onclick="cMod()">&#x2715;</button></div>
+    <div class="mbd" id="mod-b"></div>
+  </div>
+</div>
+<script>
+var SK = "cg_v2";
+function ld() { try { return JSON.parse(localStorage.getItem(SK)) || null; } catch(e) { return null; } }
+function sv(d) { localStorage.setItem(SK, JSON.stringify(d)); }
+function dfl() { return { months:{}, goals:[], events:[], notes:[], lnr:0 }; }
+var D = ld() || dfl();
+
+function mk(y,m) { return y + "-" + (m<10?"0":"") + m; }
+function tdO() { var d = new Date(); return {y:d.getFullYear(), m:d.getMonth()+1, d:d.getDate()}; }
+function tds() { return new Date().toISOString().split("T")[0]; }
+function fmt(v) { return "R$ " + Number(v||0).toLocaleString("pt-BR", {minimumFractionDigits:2}); }
+function fD(s) { if(!s) return "--"; var p=s.split("-"); return p[2]+"/"+p[1]+"/"+p[0]; }
+function ptM(k) { var p=k.split("-"); return new Date(p[0], p[1]-1, 1).toLocaleString("pt-BR", {month:"long", year:"numeric"}); }
+function esc(s) { return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+function emM(key) { if(!D.months[key]) D.months[key]={transactions:[]}; return D.months[key]; }
+
+var AT="home", SY, SM, CY2, CM2;
+(function(){ var t=tdO(); SY=t.y; SM=t.m; CY2=t.y; CM2=t.m; })();
+
+function goTab(t) {
+  AT = t;
+  document.querySelectorAll("#nav button").forEach(function(b){ b.classList.remove("active"); });
+  document.getElementById("nt-"+t).classList.add("active");
+  document.getElementById("mnav").style.display = (t==="fin") ? "flex" : "none";
+  ren();
+}
+function chM(d) { SM+=d; if(SM>12){SM=1;SY++;} if(SM<1){SM=12;SY--;} uML(); ren(); }
+function uML() { document.getElementById("mlbl").textContent = new Date(SY,SM-1,1).toLocaleString("pt-BR",{month:"long",year:"numeric"}); }
+function uHD() { document.getElementById("hdr-date").textContent = new Date().toLocaleDateString("pt-BR",{weekday:"short",day:"numeric",month:"short"}); }
+function oMod(title, html) { document.getElementById("mod-t").textContent=title; document.getElementById("mod-b").innerHTML=html; document.getElementById("mod-ov").classList.add("open"); }
+function cMod() { document.getElementById("mod-ov").classList.remove("open"); }
+
+function ring(pct, sz, col) {
+  sz = sz||64; col = col||"#c9a84c";
+  var st=6, r=(sz-st)/2, c=2*Math.PI*r, dash=Math.min(pct,100)/100*c;
+  return '<div style="position:relative;width:'+sz+'px;height:'+sz+'px;flex-shrink:0">'
+    +'<svg width="'+sz+'" height="'+sz+'" style="transform:rotate(-90deg)">'
+    +'<circle cx="'+(sz/2)+'" cy="'+(sz/2)+'" r="'+r+'" fill="none" stroke="#152640" stroke-width="'+st+'"/>'
+    +'<circle cx="'+(sz/2)+'" cy="'+(sz/2)+'" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="'+st
+    +'" stroke-dasharray="'+c+'" stroke-dashoffset="'+(c-dash)+'" stroke-linecap="round"/>'
+    +'</svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#f5f0e8">'+Math.round(pct)+'%</div></div>';
+}
+
+function bChart(data) {
+  var mx=0; data.forEach(function(d){ if(d.v>mx) mx=d.v; }); if(mx===0) mx=1;
+  var cols=["#1e3254","#2e4a6a","#c9a84c"];
+  var h='<div style="display:flex;align-items:flex-end;gap:8px;height:80px">';
+  data.forEach(function(d,i){
+    h+='<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">'
+      +'<span style="font-size:10px;color:#8a9ab0">'+fmt(d.v).replace("R$ ","")+'</span>'
+      +'<div style="width:100%;background:'+cols[i]+';border-radius:4px 4px 0 0;height:'+Math.max(d.v/mx*50,4)+'px"></div>'
+      +'<span style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:0.5px">'+d.l+'</span></div>';
+  });
+  return h+'</div>';
+}
+
+function fld(lbl, inner) { return '<div class="fld"><label>'+lbl+'</label>'+inner+'</div>'; }
+function ipt(id, tp, ph, vl) { return '<input id="'+id+'" type="'+tp+'" placeholder="'+esc(ph||'')+'" value="'+esc(vl||'')+'" />'; }
+function slct(id, opts, vl) {
+  var h='<select id="'+id+'">';
+  opts.forEach(function(o){ h+='<option value="'+esc(o.v)+'"'+(String(o.v)===String(vl)?' selected':'')+'>'+esc(o.l)+'</option>'; });
+  return h+'</select>';
+}
+function txta(id, ph) { return '<textarea id="'+id+'" placeholder="'+esc(ph)+'"></textarea>'; }
+
+var CATS = ["Fornecedores","Aluguel Material","Ingredientes","Funcionarios","Marketing","Transporte","Manutencao","Equipamentos","Outros"];
+
+// ── HOME ──────────────────────────────────────────────────────────────────────
+function rHome() {
+  var t=tdO(), cy=t.y, cm=t.m, cmk=mk(cy,cm);
+  var txs = D.months[cmk] ? (D.months[cmk].transactions||[]) : [];
+  var ci=0, co=0;
+  txs.forEach(function(x){ if(x.type==="entrada") ci+=x.amount; else co+=x.amount; });
+
+  var m3=[];
+  for(var i=2; i>=0; i--) {
+    var mm=cm-i, yy=cy;
+    if(mm<=0){ mm+=12; yy--; }
+    var k=mk(yy,mm), sp=0;
+    (D.months[k] ? (D.months[k].transactions||[]) : []).forEach(function(x){ if(x.type==="saida") sp+=x.amount; });
+    m3.push({l: new Date(yy,mm-1,1).toLocaleString("pt-BR",{month:"short"}), v:sp});
+  }
+  var diff=m3[2].v-m3[1].v, dpc=m3[1].v>0 ? Math.abs(diff/m3[1].v*100).toFixed(1) : 0;
+  var dtx=diff>0 ? "&#9650; Gastos +"+dpc+"%" : diff<0 ? "&#9660; Gastos -"+dpc+"%" : "= Estavel";
+  var dc = diff>0 ? "#f87171" : "#4ade80";
+
+  var now=new Date();
+  var nev = D.events.filter(function(e){ var dif=(new Date(e.date)-now)/86400000; return dif>=-1&&dif<=30; })
+    .sort(function(a,b){ return a.date>b.date?1:-1; }).slice(0,3);
+  var pn = D.notes.filter(function(n){ return !n.done; });
+  var mn = new Date(cy,cm-1,1).toLocaleString("pt-BR",{month:"long",year:"numeric"});
+
+  var h = '<div style="text-align:center;font-size:12px;color:#4a6080;text-transform:uppercase;margin-bottom:16px;letter-spacing:1px">'+mn+'</div>';
+
+  h += '<div class="g2">'
+    +'<div class="csm"><div style="font-size:9px;color:#4a6080;margin-bottom:5px;letter-spacing:0.5px;text-transform:uppercase">Total Recebido</div>'
+    +'<div style="font-size:17px;font-weight:700;color:#4ade80;font-family:serif">'+fmt(ci)+'</div></div>'
+    +'<div class="csm"><div style="font-size:9px;color:#4a6080;margin-bottom:5px;letter-spacing:0.5px;text-transform:uppercase">Total Gasto</div>'
+    +'<div style="font-size:17px;font-weight:700;color:#f87171;font-family:serif">'+fmt(co)+'</div></div>'
+    +'</div>';
+
+  h += '<div class="card"><div class="rbw" style="margin-bottom:12px"><span class="stl" style="margin:0">Comparativo de Gastos</span>'
+    +'<span style="font-size:11px;font-weight:600;color:'+dc+'">'+dtx+'</span></div>'+bChart(m3)+'</div>';
+
+  h += '<div class="card"><div class="stl">Proximos Eventos</div>';
+  if(!nev.length) h += '<div class="emp" style="padding:8px 0">Nenhum evento nos proximos 30 dias</div>';
+  nev.forEach(function(e){
+    var dl=Math.ceil((new Date(e.date)-new Date())/86400000);
+    var uc=dl<=3?"#f87171":dl<=7?"#fbbf24":"#4ade80";
+    h += '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(201,168,76,0.08)">'
+      +'<div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:6px 10px;text-align:center;min-width:44px">'
+      +'<div style="font-size:15px;font-weight:700;color:#c9a84c">'+e.date.split("-")[2]+'</div>'
+      +'<div style="font-size:9px;color:#4a6080;text-transform:uppercase">'+new Date(e.date+"T12:00").toLocaleString("pt-BR",{month:"short"})+'</div></div>'
+      +'<div style="flex:1"><div style="font-size:13px;font-weight:500;color:#f5f0e8">'+esc(e.name)+'</div>'
+      +'<div style="font-size:11px;color:#4a6080">'+esc(e.client||"")+(e.people?" &middot; "+e.people+" pax":"")+'</div></div>'
+      +'<span style="font-size:10px;font-weight:700;color:'+uc+'">'+(dl<=0?"HOJE":dl+"d")+'</span></div>';
+  });
+  h += '</div>';
+
+  if(pn.length) {
+    h += '<div class="ab aw"><div style="font-size:12px;color:#c9a84c;font-weight:600;margin-bottom:6px">&#128221; Pendencias do dia ('+pn.length+')</div>';
+    pn.slice(0,4).forEach(function(n){ h += '<div style="font-size:12px;color:#d4cfc4;padding:2px 0">&#8226; '+esc(n.text)+'</div>'; });
+    if(pn.length>4) h += '<div style="font-size:11px;color:#4a6080;margin-top:4px">+'+(pn.length-4)+' mais...</div>';
+    h += '</div>';
+  }
+
+  var ag = D.goals.filter(function(g){ return (g.saved/g.target)<1; });
+  if(ag.length) {
+    h += '<div class="card"><div class="stl">Metas da Empresa</div>';
+    ag.slice(0,2).forEach(function(g){
+      var p = g.target>0 ? (g.saved/g.target)*100 : 0;
+      h += '<div style="margin-bottom:10px"><div class="rbw"><span style="font-size:13px;color:#f5f0e8">'+esc(g.name)+'</span>'
+        +'<span style="font-size:12px;color:#c9a84c">'+fmt(g.saved)+' / '+fmt(g.target)+'</span></div>'
+        +'<div class="pb"><div class="pf" style="width:'+Math.min(p,100)+'%;background:linear-gradient(90deg,#c9a84c,#e8c96a)"></div></div></div>';
+    });
+    h += '</div>';
+  }
+  return h;
+}
+
+// ── FINANCEIRO ────────────────────────────────────────────────────────────────
+function rFin() {
+  var cmk=mk(SY,SM), txs=D.months[cmk] ? (D.months[cmk].transactions||[]) : [];
+  var ti=0, to=0;
+  txs.forEach(function(x){ if(x.type==="entrada") ti+=x.amount; else to+=x.amount; });
+  var cm={};
+  txs.filter(function(x){ return x.type==="saida"; }).forEach(function(x){ var c=x.category||"Outros"; cm[c]=(cm[c]||0)+x.amount; });
+  var cd=Object.entries(cm).sort(function(a,b){ return b[1]-a[1]; });
+
+  var h = '<div class="g3">'
+    +'<div class="csm" style="text-align:center"><div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Entradas</div><div style="font-size:13px;font-weight:700;color:#4ade80">'+fmt(ti)+'</div></div>'
+    +'<div class="csm" style="text-align:center"><div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Saidas</div><div style="font-size:13px;font-weight:700;color:#f87171">'+fmt(to)+'</div></div>'
+    +'<div class="csm" style="text-align:center"><div style="font-size:9px;color:#4a6080;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Saldo</div><div style="font-size:13px;font-weight:700;color:'+(ti>=to?"#c9a84c":"#f87171")+'">'+fmt(ti-to)+'</div></div>'
+    +'</div>';
+
+  if(cd.length) {
+    h += '<div class="card"><div class="stl">Distribuicao de Gastos</div>';
+    cd.forEach(function(e){
+      h += '<div style="margin-bottom:10px"><div class="rbw" style="margin-bottom:3px">'
+        +'<span style="font-size:12px;color:#d4cfc4">'+esc(e[0])+'</span>'
+        +'<span style="font-size:12px;color:#f5f0e8;font-weight:600">'+fmt(e[1])+'</span></div>'
+        +'<div class="pb"><div class="pf" style="width:'+(to>0?(e[1]/to*100):0)+'%;background:linear-gradient(90deg,#1e3254,#c9a84c)"></div></div></div>';
+    });
+    h += '</div>';
+  }
+
+  h += '<div class="rbw" style="margin-bottom:10px"><div class="stl" style="margin:0">Lancamentos ('+txs.length+')</div>'
+    +'<div style="display:flex;gap:8px">'
+    +'<button class="btn btno" style="padding:7px 10px;font-size:11px" onclick="oNF()">&#128206; NF</button>'
+    +'<button class="btn btng" style="padding:7px 12px;font-size:11px" onclick="oTx()">+ Manual</button>'
+    +'</div></div>';
+
+  if(!txs.length) h += '<div class="emp">Nenhum lancamento neste periodo</div>';
+  txs.slice().reverse().forEach(function(x){
+    h += '<div class="txr">'
+      +'<div style="flex:1"><div class="txd">'+esc(x.desc)+'</div>'
+      +'<div class="txm">'+esc(x.category||"")+(x.where?" &middot; "+esc(x.where):"")+(x.date?" &middot; "+fD(x.date):"")+'</div></div>'
+      +'<div style="display:flex;align-items:center;gap:8px">'
+      +'<span class="tag '+(x.type==="entrada"?"ti":"to")+'">'+(x.type==="entrada"?"+ ":"- ")+fmt(x.amount)+'</span>'
+      +'<button class="ib" data-cmk="'+cmk+'" data-id="'+x.id+'" onclick="rTxBtn(this)">&#128465;</button></div></div>';
+  });
+  return h;
+}
+
+var _cmk=""; var _evDate=""; 
+function oTx() {
+  var cmk=mk(SY,SM); _cmk=cmk;
+  var cats=CATS.map(function(c){ return {v:c,l:c}; });
+  oMod("Lancamento Manual",
+    fld("Tipo", slct("tp",[{v:"saida",l:"Saida (pagamento)"},{v:"entrada",l:"Entrada (recebimento)"}]))
+    +fld("Descricao", ipt("ds","text","Ex: Mercado, fornecedor..."))
+    +fld("Valor (R$)", ipt("am","number","0"))
+    +fld("Categoria", slct("ct",cats,"Outros"))
+    +fld("Fornecedor / Local", ipt("wh","text",""))
+    +fld("Data", ipt("dt","date",tds()))
+    +'<button class="btn btng btnf" onclick="aTx()">Registrar</button>'
+  );
+}
+function aTx() { var cmk=_cmk;
+  var ds=document.getElementById("ds").value.trim(), am=parseFloat(document.getElementById("am").value);
+  if(!ds||!am) return;
+  emM(cmk).transactions.push({id:Date.now(), desc:ds, amount:am, type:document.getElementById("tp").value, category:document.getElementById("ct").value, where:document.getElementById("wh").value, date:document.getElementById("dt").value});
+  sv(D); cMod(); ren();
+}
+function rTx(cmk,id) {
+  if(D.months[cmk]) D.months[cmk].transactions=D.months[cmk].transactions.filter(function(x){ return x.id!==id; });
+  sv(D); ren();
+}
+function rTxBtn(btn) {
+  var cmk=btn.getAttribute("data-mk"), id=parseInt(btn.getAttribute("data-id"));
+  rTx(cmk,id);
+}
+
+function oNF() {
+  var cmk=mk(SY,SM); _cmk=cmk;
+  var cats=CATS.map(function(c){ return {v:c,l:c}; });
+  oMod("Nota Fiscal",
+    '<div class="drop" id="ndrop"><div id="ndc">'
+    +'<div style="font-size:28px;margin-bottom:6px">&#128196;</div>'
+    +'<div style="font-size:13px;color:#4a6080">Toque para anexar</div>'
+    +'<div style="font-size:11px;color:#2a3a4a;margin-top:3px">PDF, JPG ou PNG</div></div>'
+    +'<input type="file" id="nfi" accept=".pdf,.jpg,.jpeg,.png,.webp" style="display:none"/></div>'
+    +'<div id="nbn" style="display:none"></div>'
+    +fld("Descricao", ipt("nnm","text","Ex: Fornecedor, aluguel..."))
+    +fld("Valor (R$)", ipt("nam","number","0"))
+    +fld("Tipo", slct("ntp",[{v:"saida",l:"Saida (pagamento/compra)"},{v:"entrada",l:"Entrada (recebimento)"}]))
+    +fld("Categoria", slct("nct",cats,"Fornecedores"))
+    +fld("Fornecedor", ipt("nwh","text",""))
+    +fld("Data", ipt("ndt","date",tds()))
+    +'<button class="btn btng btnf" onclick="sNF()">Registrar Nota</button>'
+  );
+  setTimeout(function(){
+    var drop=document.getElementById("ndrop");
+    if(drop) drop.onclick=function(){ document.getElementById("nfi").click(); };
+    var fi=document.getElementById("nfi");
+    if(fi) fi.onchange=function(){ hNF(this,cmk); };
+  },100);
+}
+
+async function hNF(input, cmk) {
+  var file=input.files[0]; if(!file) return;
+  var drop=document.getElementById("ndrop"), dc=document.getElementById("ndc"), bn=document.getElementById("nbn");
+  drop.className="drop an";
+  dc.innerHTML='<div style="font-size:28px;margin-bottom:6px">&#128269;</div><div style="font-size:13px;font-weight:600;color:#c9a84c">Analisando com IA...</div>';
+  bn.style.display="none";
+  var reader=new FileReader();
+  reader.onload=async function(ev){
+    var b64=ev.target.result.split(",")[1], mt=file.type, isPdf=mt==="application/pdf", isImg=mt.startsWith("image/");
+    drop.className="drop hf";
+    dc.innerHTML='<div style="font-size:26px;margin-bottom:4px">&#9989;</div><div style="font-size:13px;font-weight:600;color:#4ade80">'+esc(file.name)+'</div><div style="font-size:11px;color:#4a6080">Toque para trocar</div>';
+    if(!isPdf&&!isImg){ bn.innerHTML='<div class="ab ae"><div style="font-size:12px;color:#f87171">Use PDF, JPG ou PNG</div></div>'; bn.style.display="block"; return; }
+    try {
+      var cb=isPdf ? {type:"document",source:{type:"base64",media_type:mt,data:b64}} : {type:"image",source:{type:"base64",media_type:mt,data:b64}};
+      var res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:600,messages:[{role:"user",content:[cb,{type:"text",text:'Analise esta nota fiscal. Retorne SOMENTE JSON sem markdown: {"valor_total":<numero>,"tipo":"saida" ou "entrada","descricao":"<max 60 chars>","fornecedor":"<nome>","data":"YYYY-MM-DD ou null","categoria":"Fornecedores|Ingredientes|Aluguel Material|Equipamentos|Outros"} Se nao identificar: {"erro":"nao_identificado"}'}]}]})});
+      var json=await res.json();
+      var txt=((json.content||[]).find(function(b){ return b.type==="text"; })||{}).text||"";
+      var parsed=JSON.parse(txt.replace(/```json|```/g,"").trim());
+      if(parsed.erro){
+        bn.innerHTML='<div class="ab ae"><div style="font-size:12px;color:#f87171">Nao identifiquei. Preencha manualmente.</div></div>';
+      } else {
+        if(parsed.valor_total) document.getElementById("nam").value=parsed.valor_total;
+        if(parsed.tipo) document.getElementById("ntp").value=parsed.tipo;
+        if(parsed.descricao) document.getElementById("nnm").value=parsed.descricao;
+        if(parsed.data) document.getElementById("ndt").value=parsed.data;
+        if(parsed.fornecedor) document.getElementById("nwh").value=parsed.fornecedor;
+        if(parsed.categoria) document.getElementById("nct").value=parsed.categoria;
+        bn.innerHTML='<div class="ab aok"><div style="font-size:11px;color:#4ade80;font-weight:600;margin-bottom:4px">&#10003; IA IDENTIFICOU</div>'
+          +'<div style="font-size:14px;color:#f5f0e8;font-weight:700">'+fmt(parsed.valor_total)+'</div>'
+          +'<div style="font-size:11px;color:#8ab090;margin-top:2px">'+(parsed.tipo==="saida"?"Pagamento":"Recebimento")+" &middot; "+esc(parsed.fornecedor||parsed.descricao||"")+'</div></div>';
+      }
+    } catch(e) {
+      bn.innerHTML='<div class="ab ae"><div style="font-size:12px;color:#f87171">Erro na analise. Preencha manualmente.</div></div>';
+    }
+    bn.style.display="block";
+  };
+  reader.readAsDataURL(file);
+}
+function sNF() { var cmk=_cmk;
+  var am=parseFloat(document.getElementById("nam").value); if(!am) return;
+  var nm=document.getElementById("nnm").value||"Nota Fiscal";
+  emM(cmk).transactions.push({id:Date.now(), desc:nm, amount:am, type:document.getElementById("ntp").value, category:document.getElementById("nct").value, where:document.getElementById("nwh").value, date:document.getElementById("ndt").value||tds(), isNF:true});
+  sv(D); cMod(); ren();
+}
+
+// ── METAS ─────────────────────────────────────────────────────────────────────
+function rMetas() {
+  var ti=D.goals.reduce(function(s,g){ return s+g.saved; },0);
+  var h='<div class="cgold"><div style="font-size:10px;color:rgba(201,168,76,0.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Investido na empresa</div>'
+    +'<div style="font-size:28px;font-weight:700;color:#c9a84c;font-family:serif">'+fmt(ti)+'</div>'
+    +'<div style="font-size:11px;color:#4a6080;margin-top:4px">'+D.goals.length+' meta(s)</div></div>';
+
+  if(!D.goals.length) h+='<div class="card"><div class="emp">Adicione metas de investimento para a empresa</div></div>';
+
+  D.goals.forEach(function(g){
+    var p=g.target>0 ? (g.saved/g.target)*100 : 0;
+    var col=p>=100?"#4ade80":"#c9a84c";
+    h+='<div class="card">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">'
+      +'<div style="flex:1;margin-right:12px">'
+      +'<div style="font-family:serif;font-weight:600;font-size:15px;color:#f5f0e8">'+esc(g.name)+'</div>'
+      +'<div style="font-size:12px;color:#4ade80;margin-top:3px">'+fmt(g.saved)+' <span style="color:#4a6080;font-size:11px">de '+fmt(g.target)+'</span></div>'
+      +'<div style="font-size:11px;color:#4a6080">'+(p>=100?"&#10003; Conquistado!":"Faltam "+fmt(g.target-g.saved))+'</div></div>'
+      +ring(p,64,col)+'</div>'
+      +'<div class="pb"><div class="pf" style="width:'+Math.min(p,100)+'%;background:linear-gradient(90deg,#c9a84c,#e8c96a)"></div></div>'
+      +'<div style="display:flex;gap:8px;margin-top:10px">'
+      +'<button class="btn btng" style="flex:1;justify-content:center;padding:8px;font-size:12px" onclick="oInv('+g.id+')">+ Investir</button>'
+      +'<button class="btn btnd" style="padding:8px 12px" onclick="rGoal('+g.id+')">&#128465;</button>'
+      +'</div></div>';
+  });
+
+  var GH=JSON.parse(localStorage.getItem("cg_gh")||"[]");
+  if(GH.length){
+    h+='<div class="card"><div class="stl">Historico de Investimentos</div>';
+    GH.slice(0,15).forEach(function(x){
+      h+='<div class="rbw" style="padding:7px 0;border-bottom:1px solid rgba(201,168,76,0.08)">'
+        +'<div><div style="font-size:13px;color:#f5f0e8">'+esc(x.desc)+'</div>'
+        +'<div style="font-size:11px;color:#4a6080">'+esc(x.goalName)+' &middot; '+fD(x.date)+'</div></div>'
+        +'<span style="color:#4ade80;font-weight:700;font-size:13px">+'+fmt(x.amount)+'</span></div>';
+    });
+    h+='</div>';
+  }
+  h+='<button class="btn btng btnf" onclick="oGoal()" style="margin-top:4px">+ Nova Meta</button>';
+  return h;
+}
+function oGoal(){
+  oMod("Nova Meta Empresarial",
+    fld("Nome da meta", ipt("gn","text","Ex: Novo forno, Van, Reforma..."))
+    +fld("Valor necessario (R$)", ipt("gt","number","0"))
+    +fld("Justificativa", txta("gd","Por que esta meta e importante..."))
+    +'<button class="btn btng btnf" onclick="aGoal()">Criar Meta</button>'
+  );
+}
+function aGoal(){
+  var n=document.getElementById("gn").value.trim(), t=parseFloat(document.getElementById("gt").value);
+  if(!n||!t) return;
+  D.goals.push({id:Date.now(), name:n, target:t, saved:0});
+  sv(D); cMod(); ren();
+}
+function rGoal(id){ if(!confirm("Remover esta meta?")) return; D.goals=D.goals.filter(function(g){ return g.id!==id; }); sv(D); ren(); }
+function oInv(pre){
+  var opts=[{v:"",l:"Selecione a meta..."}].concat(D.goals.map(function(g){ return {v:g.id, l:g.name+" - faltam "+fmt(g.target-g.saved)}; }));
+  oMod("Registrar Investimento",
+    fld("Meta", slct("ig",opts,pre||""))
+    +fld("Valor (R$)", ipt("ia","number","0"))
+    +fld("Descricao", ipt("id2","text","Ex: Deposito, aquisicao..."))
+    +fld("Data", ipt("idt","date",tds()))
+    +'<button class="btn btng btnf" onclick="aInv()">Confirmar</button>'
+  );
+}
+function aInv(){
+  var gid=parseInt(document.getElementById("ig").value), am=parseFloat(document.getElementById("ia").value);
+  if(!gid||!am) return;
+  var g=D.goals.find(function(x){ return x.id===gid; }); if(!g) return;
+  g.saved=Math.min(g.saved+am, g.target);
+  var GH=JSON.parse(localStorage.getItem("cg_gh")||"[]");
+  GH.unshift({id:Date.now(), goalId:gid, goalName:g.name, amount:am, desc:document.getElementById("id2").value||"Aporte", date:document.getElementById("idt").value||tds()});
+  localStorage.setItem("cg_gh", JSON.stringify(GH));
+  sv(D); cMod(); ren();
+}
+
+// ── EVENTOS ───────────────────────────────────────────────────────────────────
+function rEventos(){
+  var fd=new Date(CY2,CM2-1,1).getDay(), dim=new Date(CY2,CM2,0).getDate(), t=tdO();
+  var mn=new Date(CY2,CM2-1,1).toLocaleString("pt-BR",{month:"long",year:"numeric"});
+  var mev=D.events.filter(function(e){ return e.date&&e.date.startsWith(mk(CY2,CM2)); });
+  var ed={}; mev.forEach(function(e){ var d=parseInt(e.date.split("-")[2]); ed[d]=true; });
+  var DN=["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
+
+  var h='<div class="card">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">'
+    +'<button style="background:none;border:none;color:#c9a84c;font-size:18px;cursor:pointer" onclick="chCal(-1)">&#9664;</button>'
+    +'<span style="font-family:serif;font-size:15px;color:#c9a84c;text-transform:capitalize">'+mn+'</span>'
+    +'<button style="background:none;border:none;color:#c9a84c;font-size:18px;cursor:pointer" onclick="chCal(1)">&#9654;</button>'
+    +'</div><div class="cgrd">';
+  DN.forEach(function(d){ h+='<div class="cdn">'+d+'</div>'; });
+  for(var i=0;i<fd;i++) h+='<div class="cd om"></div>';
+  for(var dv=1;dv<=dim;dv++){
+    var iT=dv===t.d&&CM2===t.m&&CY2===t.y, hE=ed[dv];
+    var cls="cd"+(iT?" tdy":"")+(hE?" hev":""); h+='<div class="'+cls+'" onclick="sDayEv('+dv+')">'+dv+'</div>';
+  }
+  h+='</div></div>';
+
+  var up=D.events.filter(function(e){ return e.date>=tds(); }).sort(function(a,b){ return a.date>b.date?1:-1; });
+  var pt=D.events.filter(function(e){ return e.date<tds(); }).sort(function(a,b){ return a.date>b.date?-1:1; }).slice(0,5);
+
+  h+='<div class="rbw" style="margin-bottom:10px"><div class="stl" style="margin:0">Proximos Eventos</div>'
+    +'<button class="btn btng" style="padding:7px 12px;font-size:11px" onclick="oEv("")">+ Novo</button></div>';
+
+  if(!up.length) h+='<div class="emp">Nenhum evento agendado</div>';
+  up.forEach(function(e){
+    var dl=Math.ceil((new Date(e.date)-new Date())/86400000);
+    var uc=dl<=3?"#f87171":dl<=7?"#fbbf24":"#c9a84c";
+    h+='<div class="evc">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
+      +'<div><div style="font-family:serif;font-size:15px;color:#f5f0e8;font-weight:600">'+esc(e.name)+'</div>'
+      +(e.client?'<div style="font-size:12px;color:#4a6080;margin-top:2px">Cliente: '+esc(e.client)+'</div>':"")
+      +'</div><span class="edb">'+fD(e.date)+'</span></div>';
+    if(e.people||e.local||e.value){
+      h+='<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">'
+        +(e.people?'<span style="font-size:11px;color:#d4cfc4">&#128101; '+e.people+' pax</span>':"")
+        +(e.local?'<span style="font-size:11px;color:#d4cfc4">&#128205; '+esc(e.local)+'</span>':"")
+        +(e.value?'<span style="font-size:11px;color:#4ade80">&#128178; '+fmt(e.value)+'</span>':"")
+        +'</div>';
+    }
+    if(e.notes) h+='<div style="font-size:11px;color:#4a6080;margin-top:6px;font-style:italic">'+esc(e.notes)+'</div>';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">'
+      +'<span style="font-size:11px;font-weight:700;color:'+uc+'">'+(dl<=0?"&#128308; HOJE":dl===1?"&#128993; Amanha":"&#128994; "+dl+" dias")+'</span>'
+      +'<button class="ib" onclick="rEv('+e.id+')">&#128465;</button></div></div>';
+  });
+
+  if(pt.length){
+    h+='<div class="stl" style="margin-top:4px">Eventos Realizados</div>';
+    pt.forEach(function(e){
+      h+='<div class="txr"><div><div class="txd">'+esc(e.name)+'</div>'
+        +'<div class="txm">'+fD(e.date)+(e.client?" &middot; "+esc(e.client):"")+(e.people?" &middot; "+e.people+" pax":"")+'</div></div>'
+        +(e.value?'<span class="tag ti">'+fmt(e.value)+'</span>':"")+'</div>';
+    });
+  }
+  return h;
+}
+function chCal(d){ CM2+=d; if(CM2>12){CM2=1;CY2++;} if(CM2<1){CM2=12;CY2--;} ren(); }
+function sDayEv(day){
+  var ds=mk(CY2,CM2)+"-"+(day<10?"0":"")+day;
+  _evDate=ds;
+  var evs=D.events.filter(function(e){ return e.date===ds; });
+  if(!evs.length){
+    _evDate=ds; oMod(fD(ds),'<div class="emp">Nenhum evento neste dia</div><button class="btn btng btnf" style="margin-top:10px" onclick="oEv(_evDate)">+ Adicionar Evento</button>');
+    return;
+  }
+  var h="";
+  evs.forEach(function(e){
+    h+='<div class="evc"><div style="font-family:serif;font-size:15px;color:#f5f0e8">'+esc(e.name)+'</div>'
+      +(e.client?'<div style="font-size:12px;color:#4a6080;margin-top:2px">'+esc(e.client)+'</div>':"")
+      +(e.people?'<div style="font-size:12px;color:#d4cfc4">&#128101; '+e.people+' pessoas</div>':"")
+      +(e.local?'<div style="font-size:12px;color:#d4cfc4">&#128205; '+esc(e.local)+'</div>':"")
+      +(e.value?'<div style="font-size:13px;color:#4ade80;font-weight:600;margin-top:4px">'+fmt(e.value)+'</div>':"")
+      +(e.notes?'<div style="font-size:11px;color:#4a6080;margin-top:6px;font-style:italic">'+esc(e.notes)+'</div>':"")
+      +'<button class="btn btnd" style="width:100%;justify-content:center;margin-top:10px;padding:8px" onclick="rEv('+e.id+')">Remover</button></div>';
+  });
+  h+='<button class="btn btno btnf" style="margin-top:4px" onclick="oEv(_evDate)">+ Adicionar neste dia</button>';
+  oMod(fD(ds), h);
+}
+function oEvNew(){oEv("")}
+function oEv(dt){
+  oMod("Novo Evento",
+    fld("Nome do evento", ipt("en","text","Ex: Casamento Silva, Aniversario..."))
+    +fld("Cliente", ipt("ec","text","Ex: Joao e Maria"))
+    +fld("Data do evento", ipt("ed","date",dt||tds()))
+    +fld("Local", ipt("el","text","Ex: Chacara dos Ipes..."))
+    +fld("Numero de pessoas", ipt("ep","number","0"))
+    +fld("Valor do contrato (R$)", ipt("ev2","number","0"))
+    +fld("Observacoes", txta("eo","Cardapio especial, restricoes..."))
+    +'<button class="btn btng btnf" onclick="aEv()">Salvar Evento</button>'
+  );
+}
+function aEv(){
+  var nm=document.getElementById("en").value.trim(), dt=document.getElementById("ed").value;
+  if(!nm||!dt) return;
+  D.events.push({id:Date.now(), name:nm, client:document.getElementById("ec").value, date:dt, local:document.getElementById("el").value, people:document.getElementById("ep").value, value:parseFloat(document.getElementById("ev2").value)||0, notes:document.getElementById("eo").value});
+  sv(D); cMod(); ren();
+}
+function rEv(id){ D.events=D.events.filter(function(e){ return e.id!==id; }); sv(D); ren(); }
+
+// ── NOTAS ─────────────────────────────────────────────────────────────────────
+function rNotas(){
+  var pn=D.notes.filter(function(n){ return !n.done; });
+  var dn=D.notes.filter(function(n){ return n.done; });
+  var h='<div class="cgold"><div style="display:flex;justify-content:space-between;align-items:center">'
+    +'<div><div style="font-size:9px;color:rgba(201,168,76,0.6);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Pendencias</div>'
+    +'<div style="font-size:26px;font-weight:700;color:#c9a84c;font-family:serif">'+pn.length+'</div></div>'
+    +'<div style="text-align:right"><div style="font-size:11px;color:#4a6080">Concluidas</div>'
+    +'<div style="font-size:22px;font-weight:700;color:#4ade80">'+dn.length+'</div></div></div></div>';
+
+  h+='<div class="rbw" style="margin-bottom:10px"><div class="stl" style="margin:0">Lista do Dia</div>'
+    +'<button class="btn btng" style="padding:7px 12px;font-size:11px" onclick="oNote()">+ Tarefa</button></div>';
+
+  if(!D.notes.length) h+='<div class="emp">Adicione tarefas e lembretes do dia</div>';
+
+  pn.forEach(function(n){
+    h+='<div class="ni"><label class="chkl" style="flex:1;align-items:flex-start;gap:10px">'
+      +'<input type="checkbox" onchange="tNote('+n.id+')">'
+      +'<div><div style="font-size:13px;color:#f5f0e8;line-height:1.4">'+esc(n.text)+'</div>'
+      +(n.priority==="alta"?'<span style="font-size:10px;color:#f87171;font-weight:600;letter-spacing:0.5px">&#9670; URGENTE</span>':"")
+      +'</div></label><button class="ib" onclick="rmNote('+n.id+')">&#128465;</button></div>';
+  });
+
+  if(dn.length){
+    h+='<div style="font-size:11px;color:#4a6080;margin:12px 0 6px;letter-spacing:0.5px;text-transform:uppercase">Concluidas</div>';
+    dn.forEach(function(n){
+      h+='<div class="ni" style="opacity:0.4"><label class="chkl" style="flex:1">'
+        +'<input type="checkbox" checked onchange="tNote('+n.id+')">'
+        +'<span style="font-size:13px;text-decoration:line-through">'+esc(n.text)+'</span>'
+        +'</label><button class="ib" onclick="rmNote('+n.id+')">&#128465;</button></div>';
+    });
+  }
+  h+='<div style="margin-top:12px"><button class="btn btno btnf" onclick="clDone()">&#128465; Limpar concluidas</button></div>';
+  return h;
+}
+function oNote(){
+  oMod("Nova Tarefa",
+    fld("Tarefa / Lembrete", txta("ntx","Ex: Ir ao sacolao, ligar para cliente X..."))
+    +fld("Prioridade", slct("npr",[{v:"normal",l:"Normal"},{v:"alta",l:"Urgente"}]))
+    +'<button class="btn btng btnf" onclick="aNt()">Adicionar</button>'
+  );
+}
+function aNt(){ var tx=document.getElementById("ntx").value.trim(); if(!tx) return; D.notes.push({id:Date.now(),text:tx,done:false,priority:document.getElementById("npr").value,date:tds()}); sv(D); cMod(); ren(); }
+function tNote(id){ var n=D.notes.find(function(x){ return x.id===id; }); if(n) n.done=!n.done; sv(D); ren(); }
+function rmNote(id){ D.notes=D.notes.filter(function(n){ return n.id!==id; }); sv(D); ren(); }
+function clDone(){ D.notes=D.notes.filter(function(n){ return !n.done; }); sv(D); ren(); }
+
+function chkRem(){
+  var pn=D.notes.filter(function(n){ return !n.done; }); if(!pn.length) return;
+  var now=Date.now(), last=D.lnr||0;
+  if(now-last<7200000) return;
+  D.lnr=now; sv(D);
+  if(Notification&&Notification.permission==="granted")
+    new Notification("Contemporaneo - Pendencias",{body:"Voce tem "+pn.length+" tarefa(s) pendente(s)."});
+}
+if(Notification&&Notification.permission==="default") Notification.requestPermission();
+setInterval(chkRem, 60000);
+
+function ren(){
+  var c=document.getElementById("content");
+  if(AT==="home") c.innerHTML=rHome();
+  else if(AT==="fin") c.innerHTML=rFin();
+  else if(AT==="metas") c.innerHTML=rMetas();
+  else if(AT==="eventos") c.innerHTML=rEventos();
+  else if(AT==="notas") c.innerHTML=rNotas();
+  uML();
+}
+uHD(); uML(); ren();
+</script>
+</body>
+</html>
